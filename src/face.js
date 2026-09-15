@@ -22,11 +22,25 @@ export class Face {
   }
 
   eyes(e) {
-    // face.eyes(new Ellipse().size(20, 20).fill('#000000'));
-    const le = this.features.add(e.clone().move(-20, 140));
-    const re = this.features.add(e.clone().move(20, 140));
+    const w = e.bbox().width;
+    const offset = 80;
+    const eyes = new SVG();
+    eyes.add(e.clone().addClass('eye').addClass('-left').move(0, 0));
+    eyes.add(e.clone().addClass('eye').addClass('-right').move(offset, 0));
+
+    const eyeWidth = eyes.bbox().width;
+    this.features.add(eyes.move(-eyeWidth/2, 100));
   }
 
+  nose(n) {
+    const w = n.bbox().width;
+    this.features.add(n.addClass('nose').move(-w/2, 200));
+  }
+
+  mouth(n) {
+    const w = n.bbox().width;
+    this.features.add(n.addClass('mouth').move(-w/2, 300));
+  }
 
   svg() {
     // console.log("MOVE", this.container.bbox().width/2)
@@ -34,6 +48,8 @@ export class Face {
     // this.features.transform({
     //   translateX: this.container.bbox().width/2
     // })
+
+
     this.features.viewbox(-(this.container.bbox().width/2), 0, this.container.bbox().width, this.container.bbox().height)
     console.log(this.container.svg());
     return this.container.svg();
