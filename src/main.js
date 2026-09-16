@@ -11,6 +11,9 @@ const face = new Face(
 face.eyes(new Ellipse().size(20, 20).fill('#000000'));
 face.nose(new Rect().size(20, 20).fill('#000000'));
 face.mouth(new Rect().size(60, 20).fill('#000000'));
+face.hair(new Rect().size(200, 20).fill('#000000'));
+face.ears(new Rect().size(10, 100).fill('#000000'));
+
 
 face.size(400, 400);
 console.log(face);

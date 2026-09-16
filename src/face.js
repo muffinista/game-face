@@ -32,6 +32,17 @@ export class Face {
     this.features.add(eyes.move(-eyeWidth/2, 100));
   }
 
+  ears(e) {
+    const w = e.bbox().width;
+    const offset = 200;
+    const ears = new SVG();
+    ears.add(e.clone().addClass('ear').addClass('-left').move(0, 0));
+    ears.add(e.clone().addClass('ear').addClass('-right').move(offset, 0));
+
+    const earsWidth = ears.bbox().width;
+    this.features.add(ears.move(-earsWidth/2, 130));
+  }
+
   nose(n) {
     const w = n.bbox().width;
     this.features.add(n.addClass('nose').move(-w/2, 200));
@@ -40,6 +51,11 @@ export class Face {
   mouth(n) {
     const w = n.bbox().width;
     this.features.add(n.addClass('mouth').move(-w/2, 300));
+  }
+
+  hair(n) {
+    const w = n.bbox().width;
+    this.features.add(n.addClass('hair').move(-w/2, 0));
   }
 
   svg() {
