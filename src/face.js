@@ -17,30 +17,20 @@ export class Face {
     this.features.size(w, h);
   }
 
-  addFeature(f) {
-    return this.features.add(f);
-  }
-
   eyes(e) {
     const w = e.bbox().width;
     const offset = 80;
-    const eyes = new SVG();
-    eyes.add(e.clone().addClass('eye').addClass('-left').move(0, 0));
-    eyes.add(e.clone().addClass('eye').addClass('-right').move(offset, 0));
 
-    const eyeWidth = eyes.bbox().width;
-    this.features.add(eyes.move(-eyeWidth/2, 100));
+    this.features.add(e.clone().addClass('eye').addClass('-left').move(-offset, 20));
+    this.features.add(e.clone().addClass('eye').addClass('-right').move(offset, 20));
   }
 
   ears(e) {
     const w = e.bbox().width;
     const offset = 200;
-    const ears = new SVG();
-    ears.add(e.clone().addClass('ear').addClass('-left').move(0, 0));
-    ears.add(e.clone().addClass('ear').addClass('-right').move(offset, 0));
 
-    const earsWidth = ears.bbox().width;
-    this.features.add(ears.move(-earsWidth/2, 130));
+    this.features.add(e.clone().addClass('ear').addClass('-left').move(-offset, 0));
+    this.features.add(e.clone().addClass('ear').addClass('-right').move(offset, 0));
   }
 
   nose(n) {
@@ -55,7 +45,25 @@ export class Face {
 
   hair(n) {
     const w = n.bbox().width;
-    this.features.add(n.addClass('hair').move(-w/2, 0));
+    this.features.add(n.addClass('hair').move(-w/2, -100));
+  }
+
+  torso(t) {
+    const w = t.bbox().width;
+    this.container.add(t.addClass('torso').move(0, 400));
+  }
+
+  bbox() {
+    return this.container.bbox();
+  }
+
+  addClass(c) {
+    this.container.addClass(c);
+    return this;
+  }
+
+  move(x, y) {
+    this.container.move(x, y);
   }
 
   svg() {
@@ -66,8 +74,8 @@ export class Face {
     // })
 
 
-    this.features.viewbox(-(this.container.bbox().width/2), 0, this.container.bbox().width, this.container.bbox().height)
-    console.log(this.container.svg());
+    this.features.viewbox(-(this.container.bbox().width/2), 0, this.container.bbox().width, this.container.bbox().height);
+    // console.log(this.container.svg());
     return this.container.svg();
   }
 }

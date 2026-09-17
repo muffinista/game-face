@@ -14,8 +14,9 @@ face.mouth(new Rect().size(60, 20).fill('#000000'));
 face.hair(new Rect().size(200, 20).fill('#000000'));
 face.ears(new Rect().size(10, 100).fill('#000000'));
 
+face.torso(new Rect().size(400, 60).fill('#dddddd'));
+face.size(400, 600);
 
-face.size(400, 400);
-console.log(face);
+
 document.querySelector('#app').innerHTML = face.svg();
 
